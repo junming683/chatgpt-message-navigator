@@ -54,7 +54,17 @@ npm run build
 
 ### 3. Quick way to inject into ChatGPT
 
-- You can load the built script into ChatGPT by using Developer mode in `chrome://extensions/` and load the extension (unpacked) into Chrome/Edge/Firefox and open ChatGPT.
+- You can load the built extension in Chrome/Edge using `chrome://extensions/` -> **Load unpacked** and choose the `dist` folder.
+
+For **Firefox (PC)** local import:
+
+1. Run `npm run build` to generate the latest `dist/` files.
+2. Open Firefox and visit `about:debugging#/runtime/this-firefox`.
+3. Click **Load Temporary Add-on...**.
+4. Select `dist/manifest.json` from this project.
+5. Open `https://chatgpt.com` (or `https://chat.openai.com`) and use the navigator toolbar.
+
+> Note: Temporary add-ons are removed when Firefox closes. Re-load the add-on from `about:debugging` after restart.
 
 ### 4. Using the toolbar inside ChatGPT
 
