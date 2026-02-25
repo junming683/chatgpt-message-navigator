@@ -1,13 +1,25 @@
 import { injectNavigationButtons } from "./inject-navigation-buttons";
 import "./styles.css"
 
-injectNavigationButtons();
-
-const observer = new MutationObserver(() => {
+const runInjection = () => {
   injectNavigationButtons();
-});
+};
 
-observer.observe(document.querySelector("main")!, {
-  childList: true,
-  subtree: true,
-});
+runInjection();
+
+const observer = new MutationObserver(runInjection);
+
+const startObserving = () => {
+  const main = document.querySelector("main");
+  if (!main) {
+    window.setTimeout(startObserving, 250);
+    return;
+  }
+
+  observer.observe(main, {
+    childList: true,
+    subtree: true,
+  });
+};
+
+startObserving();

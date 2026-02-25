@@ -3,13 +3,14 @@ import { createBtn } from "./createBtn";
 import { hasChatStateChanged } from "./hasChatStateChanged";
 
 export function injectNavigationButtons() {
+  const chatArray = document.querySelectorAll<HTMLElement>("article[data-turn-id]");
+  if (chatArray.length === 0) return;
 
-  const parent = document.querySelector('div[role="presentation"]');
-  if (!parent) return;
-
-  const msgContainer = parent.firstElementChild;
-  const chatArray = parent.querySelectorAll("article");
-  if (!msgContainer || chatArray.length === 0) return;
+  const firstArticle = chatArray[0];
+  const msgContainer =
+    firstArticle.closest("[role='presentation']")?.firstElementChild ||
+    firstArticle.parentElement;
+  if (!msgContainer) return;
 
   let btnContainer = msgContainer.querySelector("#navigate-btn-container");
   if (!btnContainer) {
